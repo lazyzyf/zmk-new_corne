@@ -119,21 +119,22 @@ ZMK_HOLD_TAP(as,
 // ZMK_COMBO(copy,     &kp LC(C),   LB2 LB3, ALL)
 // ZMK_COMBO(paste,    &kp LC(V),   LB1 LB2, ALL)
 
-ZMK_LAYER(qwerty,
-&kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L   &kp BSPC
-&kp TAB     &kp A        &kp O         &kp E         &kp U          &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &kp H         &kp T         &kp N         &kp S   &kp SQT
-&kp LCTRL   &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z   &kp ESC
-                                       &kp J       &kp SPACE  &kp RET                                &kp ESC &kp RET   &kp RET
-// sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
-)
-
-// ZMK_LAYER(dvorak,
-// &kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L         &kp BSPC
-// &kp TAB     &hml LGUI A  &hml LALT O   &hml LCTRL E  &hml LSHFT U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &kp SQT
-// &kp LCTRL   &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z         &kp ESC
-//                                        &mo NUM       &lt NUM SPACE  &bs_del_num                                &kp ESC &lt SYM RET   &mo FN
+// ZMK_LAYER(qwerty,
+// &kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L   &kp BSPC
+// &kp TAB     &kp A        &kp O         &kp E         &kp U          &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &kp H         &kp T         &kp N         &kp S   &kp SQT
+// &kp LCTRL   &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z   &kp ESC
+//                                        &kp J       &kp SPACE  &kp RET                                &kp ESC &kp RET   &kp RET
 // // sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
 // )
+
+ZMK_LAYER(dvorak,
+&kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L         &kp BSPC
+&kp TAB     &hml LGUI A  &hml LALT O   &hml LCTRL E  &hml LSHFT U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &kp SQT
+&kp LCTRL   &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z         &kp ESC
+                                       &mo NUM       &lt NUM SPACE  ___                                &kp ESC &lt SYM RET   &mo FN
+                                       // &mo NUM       &lt NUM SPACE  &bs_del_num                                &kp ESC &lt SYM RET   &mo FN
+// sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+)
 
 // ZMK_LAYER(num,
 //   &kp TAB  &kp LBKT        &kp N9       &kp N8        &kp N7        &kp RBKT   &kp UP                         &sk RSHFT     &sk LCTRL &sk LALT        &sk LGUI   ___          ___            ___

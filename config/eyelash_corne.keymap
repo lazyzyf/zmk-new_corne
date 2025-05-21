@@ -140,7 +140,7 @@ ZMK_LAYER(dvorak,
 
 ZMK_LAYER(num,
 &kp SQT     &kp N1      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &sk RSHFT   &kp G         &kp C         &kp R         &kp L         &kp BSPC
-&kp TAB     &hml LGUI A  &hml LALT O   &hml LCTRL E  &hml LSHFT U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &kp SQT
+&kp TAB     &gqt LGUI MINUS  &hml LALT O   &hml LCTRL E  &hml LSHFT U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &kp SQT
 &kp LCTRL   &kp N0     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z         &kp ESC
                                        // &kp J       &kp SPACE  ___                                &kp ESC &kp RET   ___
                                        ___      &kp SPACE  &kp SPACE                      &kp ESC &kp RET   ___

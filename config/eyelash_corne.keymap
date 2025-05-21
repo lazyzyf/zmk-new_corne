@@ -99,11 +99,12 @@ ZMK_HOLD_TAP(as,
     bindings = <&kp>, <&kp>;
 )
 
-// // tap: backspace | shift + tap: delete | hold: num layer
-// ZMK_MOD_MORPH(bs_del_num,
-//     bindings = <&lt NUM BSPC>, <&kp DEL>;
-//     mods = <(MOD_LSFT|MOD_RSFT)>;
-// )
+// tap: backspace | shift + tap: delete | hold: num layer
+ZMK_MOD_MORPH(bs_del_num,
+    bindings = <&lt NUM BSPC>, <&kp DEL>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
 // // ZMK_APPLY_MATRIX_TRANSFORM(five_column_transform)
 // // ZMK_CONDITIONAL_LAYER(its_magic, 1 2, 3)
 // // windows sleep macro
@@ -131,19 +132,20 @@ ZMK_LAYER(dvorak,
 &kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L         &kp BSPC
 &kp TAB     &hml LGUI A  &hml LALT O   &hml LCTRL E  &hml LSHFT U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &kp SQT
 &kp LCTRL   &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z         &kp ESC
-                                       &kp J       &kp SPACE  ___                                &kp ESC &kp RET   ___
-                                       // &mo NUM       &lt NUM SPACE  ___                                &kp ESC &lt SYM RET   &mo FN
+                                       // &kp J       &kp SPACE  ___                                &kp ESC &kp RET   ___
+                                       &ss_cw      &kp SPACE  &bs_del_num                      &kp ESC &kp RET   &mo NUM
                                        // &mo NUM       &lt NUM SPACE  &bs_del_num                                &kp ESC &lt SYM RET   &mo FN
 // sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
 )
 
-// ZMK_LAYER(num,
-//   &kp TAB  &kp LBKT        &kp N9       &kp N8        &kp N7        &kp RBKT   &kp UP                         &sk RSHFT     &sk LCTRL &sk LALT        &sk LGUI   ___          ___            ___
-//   &kp DOT  &gqt LGUI MINUS &gqt LALT N3 &gqt LSHFT N2 &gqt LCTRL N1 &kp EQUAL  &kp LEFT  &kp ENTER  &kp RIGH  &kp LEFT      &kp DOWN  &gqt RSHFT UP   &kp RIGHT  ___          ___
-//   &kp TAB  &kp BSLH        &kp N6       &kp N5        &kp N4        &kp DEL    &kp SPACE &kp DOWN             &kp PG_DN     &kp HOME  &kp END         &kp PG_UP  &kp CAPS     ___
-//                                         &kp BSPC      &kp N0        &bs_del_num                               &kp PLUS      &gresc    &kp RET        
-// )                                                                                           
-//
+ZMK_LAYER(num,
+  &kp TAB  &kp LBKT        &kp N9       &kp N8        &kp N7        &kp RBKT   &kp UP                         &sk RSHFT     &sk LCTRL &sk LALT        &sk LGUI   ___          ___            ___
+  &kp DOT  &gqt LGUI MINUS &gqt LALT N3 &gqt LSHFT N2 &gqt LCTRL N1 &kp EQUAL  &kp LEFT  &kp ENTER  &kp RIGH  &kp LEFT      &kp DOWN  &gqt RSHFT UP   &kp RIGHT  ___          ___
+  &kp TAB  &kp BSLH        &kp N6       &kp N5        &kp N4        &kp DEL    &kp SPACE &kp DOWN             &kp PG_DN     &kp HOME  &kp END         &kp PG_UP  &kp CAPS     ___
+                                        &kp BSPC      &kp N0        &bs_del_num                               &kp PLUS      ___    &kp RET        
+                                        // &kp BSPC      &kp N0        &bs_del_num                               &kp PLUS      &gresc    &kp RET        
+)                                                                                           
+
 // ZMK_LAYER(FN,
 //   &kp TAB  &kp LBKT        &kp F9       &kp F8        &kp F7        &kp RBKT   &kp UP                         &sk RSHFT     &sk LCTRL &sk LALT        &sk LGUI   ___          ___            ___
 //   &kp DOT  &gqt LGUI MINUS &gqt LALT F3 &gqt LSHFT F2 &gqt LCTRL F1 &kp EQUAL  &kp LEFT  &kp ENTER  &kp RIGH  &kp LEFT      &kp DOWN  &gqt RSHFT UP   &kp RIGHT  ___          ___

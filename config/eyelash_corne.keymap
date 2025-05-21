@@ -99,25 +99,25 @@
 //     bindings = <&kp>, <&kp>;
 // )
 
-// // tap: backspace | shift + tap: delete | hold: num layer
-// ZMK_MOD_MORPH(bs_del_num,
-//     bindings = <&lt NUM BSPC>, <&kp DEL>;
-//     mods = <(MOD_LSFT|MOD_RSFT)>;
-// )
-// // ZMK_APPLY_MATRIX_TRANSFORM(five_column_transform)
-// // ZMK_CONDITIONAL_LAYER(its_magic, 1 2, 3)
-// // windows sleep macro
-// ZMK_MACRO(win_sleep,
-//     wait-ms = <100>;
-//     tap-ms = <5>;
-//     bindings = <&kp LG(X) &kp U &kp S>;
-// )
-// // combos
-// ZMK_COMBO(sleep,    &win_sleep,  RT3 RT4, FN)  // put Windows to sleep, only active on FN layer
-// // ZMK_COMBO(copy_cut, &copy_cut,   LB2 LB3, ALL)  // copy on tap, cut on double-tap, active on all layers
-// // ZMK_COMBO(paste,    &kp LS(INS), LB1 LB2, ALL)  // paste, active on all layers
-// ZMK_COMBO(copy,     &kp LC(C),   LB2 LB3, ALL)
-// ZMK_COMBO(paste,    &kp LC(V),   LB1 LB2, ALL)
+// tap: backspace | shift + tap: delete | hold: num layer
+ZMK_MOD_MORPH(bs_del_num,
+    bindings = <&lt NUM BSPC>, <&kp DEL>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+// ZMK_APPLY_MATRIX_TRANSFORM(five_column_transform)
+// ZMK_CONDITIONAL_LAYER(its_magic, 1 2, 3)
+// windows sleep macro
+ZMK_MACRO(win_sleep,
+    wait-ms = <100>;
+    tap-ms = <5>;
+    bindings = <&kp LG(X) &kp U &kp S>;
+)
+// combos
+ZMK_COMBO(sleep,    &win_sleep,  RT3 RT4, FN)  // put Windows to sleep, only active on FN layer
+// ZMK_COMBO(copy_cut, &copy_cut,   LB2 LB3, ALL)  // copy on tap, cut on double-tap, active on all layers
+// ZMK_COMBO(paste,    &kp LS(INS), LB1 LB2, ALL)  // paste, active on all layers
+ZMK_COMBO(copy,     &kp LC(C),   LB2 LB3, ALL)
+ZMK_COMBO(paste,    &kp LC(V),   LB1 LB2, ALL)
 
 ZMK_LAYER(qwerty,
 &kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L   &kp BSPC

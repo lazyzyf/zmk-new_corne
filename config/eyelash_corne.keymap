@@ -19,6 +19,10 @@
 #define NAV 2
 #define QUICK_TAP_MS 175
 
+&caps_word { continue-list = <UNDERSCORE MINUS BACKSPACE DOT>;
+//	mods = <MOD_LSFT | MOD_LALT>;
+};
+
 &sk {
   release-after-ms = <900>;
   quick-release;
@@ -61,35 +65,31 @@ ZMK_HOLD_TAP(hmr,
              bindings = <&kp>, <&kp>;
 )
 
-//     &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
-//     &msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
-//
-//     &msc {
-//     acceleration-exponent = <1>;        // 0
-//     time-to-max-speed-ms = <100>; // 300
-//     delay-ms = <0>;                     // 0
-// };
-//
-//     &mmv {
-//     time-to-max-speed-ms = <500>;
-//     acceleration-exponent = <1>;
-//     trigger-period-ms = <16>;
-// };
+&mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
+&msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
 
-// rgb_encoder:
-// rgb_encoder {
+&msc {
+acceleration-exponent = <1>;        // 0
+time-to-max-speed-ms = <100>; // 300
+delay-ms = <0>;                     // 0
+};
+
+&mmv {
+time-to-max-speed-ms = <500>;
+acceleration-exponent = <1>;
+trigger-period-ms = <16>;
+};
+
+// rgb_encoder: rgb_encoder {
 // compatible = "zmk,behavior-sensor-rotate";
 // #sensor-binding-cells = < 0>;
 // bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
-//   };
-//
-// scroll_encoder:
-// scroll_encoder {
+// };
+// scroll_encoder: scroll_encoder {
 // compatible = "zmk,behavior-sensor-rotate";
 // #sensor-binding-cells = < 0>;
 // bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-//
-//     tap-ms = <100>;
+// tap-ms = <100>;
 // };
 
 /* Custom behaviors */

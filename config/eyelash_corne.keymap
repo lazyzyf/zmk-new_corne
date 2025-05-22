@@ -116,7 +116,18 @@ ZMK_HOLD_TAP(as,
     quick-tap-ms = <0>;
     bindings = <&kp>, <&kp>;
 )
+// tap: mo | shift + tap: delete | hold: num layer
+ZMK_HOLD_TAP(mo_tog, 
+    flavor = "hold-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&mo>, <&tog>;
+)
 
+ZMK_BEHAVIOR(mo_tog, hold_tap,
+    flavor = "hold-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&mo>, <&tog>;
+)
 // tap: backspace | shift + tap: delete | hold: num layer
 ZMK_MOD_MORPH(bs_del_num,
     bindings = <&lt NUM BSPC>, <&kp DEL>;
@@ -150,7 +161,7 @@ ZMK_LAYER(dvorak,
 &none     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y                &kp UP                &kp F   &kp G         &kp C         &kp R         &kp L         &none
 &none     &hml LGUI A  &hml LALT O   &hml LSHFT E  &hml LCTRL U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RCTRL H  &hmr RSHFT  T  &hmr RALT N   &hmr RGUI S   &none
 &none     &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z         &none
-                                       &kp TAB       &kp SPACE      &bs_del_num                              &kp ESC &kp RET   &ss_cw ,
+                                       &kp TAB       &kp SPACE      &bs_del_num                              &kp ESC &kp RET   &mo_tog 1 1,
                                        // &mo NUM       &lt NUM SPACE  &bs_del_num                                &kp ESC &lt SYM RET   &mo FN
 &inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN
 )

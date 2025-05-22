@@ -148,7 +148,7 @@ ZMK_COMBO(paste,    &kp LC(V),   LB1 LB2, ALL)
 
 ZMK_LAYER(dvorak,
 &none     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y                &kp UP                &kp F   &kp G         &kp C         &kp R         &kp L         &none
-&none     &hml LGUI A  &hml LALT O   &hml LCTRL E  &hml LSHFT U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &none
+&none     &hml LGUI A  &hml LALT O   &hml LSHFT E  &hml LCTRL U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RCTRL H  &hmr RSHFT  T  &hmr RALT N   &hmr RGUI S   &none
 &none     &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z         &none
                                        &kp TAB       &kp SPACE      &bs_del_num                              &kp ESC &kp RET   &ss_cw ,
                                        // &mo NUM       &lt NUM SPACE  &bs_del_num                                &kp ESC &lt SYM RET   &mo FN

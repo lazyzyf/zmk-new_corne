@@ -13,10 +13,33 @@
 #include "zmk-helpers/key-labels/eyelash42.h"
 
 #define ___ &trans
+#define XXX &none
+#define DEF 0   //base  layer
+#define NUM 1   //lower
+#define SYM 2   //raise
+#define NAV 3
+#define QUICK_TAP_MS 175
+#define AS(keycode) &as LS(keycode) keycode     // Autoshift Macro
 
-#define DEF 0
-#define NUM 1
-#define NAV 2
+&caps_word { continue-list = <UNDERSCORE MINUS BACKSPACE DOT>;
+//	mods = <MOD_LSFT | MOD_LALT>;
+    //continue-list = <UNDERSCORE BACKSPACE DELETE LSHFT RSHFT>;
+};
+
+&sk {
+  release-after-ms = <900>;
+  quick-release;
+};
+
+&sl { // Allow sticky mods to chord across sticky layers.
+  ignore-modifiers;
+};
+
+&lt {
+  flavor = "balanced";
+  tapping-term-ms = <180>;
+  quick-tap-ms = <QUICK_TAP_MS>;
+};
 
 /* Timeless homerow mods */
 
@@ -29,6 +52,7 @@ ZMK_HOLD_TAP(hml,
              flavor = "balanced";
              tapping-term-ms = <280>;
              require-prior-idle-ms = <150>;
+             // quick-tap-ms = <175>;
              hold-trigger-key-positions = <KEYS_R THUMBS>;
              hold-trigger-on-release;
              bindings = <&kp>, <&kp>;
@@ -38,40 +62,37 @@ ZMK_HOLD_TAP(hmr,
              flavor = "balanced";
              tapping-term-ms = <280>;
              require-prior-idle-ms = <150>;
+             // quick-tap-ms = <175>;
              hold-trigger-key-positions = <KEYS_L THUMBS>;
              hold-trigger-on-release;
              bindings = <&kp>, <&kp>;
 )
 
-//     &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
-//     &msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
-//
-//     &msc {
-//     acceleration-exponent = <1>;        // 0
-//     time-to-max-speed-ms = <100>; // 300
-//     delay-ms = <0>;                     // 0
-// };
-//
-//     &mmv {
-//     time-to-max-speed-ms = <500>;
-//     acceleration-exponent = <1>;
-//     trigger-period-ms = <16>;
-// };
+&mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
+&msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
 
-// rgb_encoder:
-// rgb_encoder {
+&msc {
+acceleration-exponent = <1>;        // 0
+time-to-max-speed-ms = <100>; // 300
+delay-ms = <0>;                     // 0
+};
+
+&mmv {
+time-to-max-speed-ms = <500>;
+acceleration-exponent = <1>;
+trigger-period-ms = <16>;
+};
+
+// rgb_encoder: rgb_encoder {
 // compatible = "zmk,behavior-sensor-rotate";
 // #sensor-binding-cells = < 0>;
 // bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
-//   };
-//
-// scroll_encoder:
-// scroll_encoder {
+// };
+// scroll_encoder: scroll_encoder {
 // compatible = "zmk,behavior-sensor-rotate";
 // #sensor-binding-cells = < 0>;
 // bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-//
-//     tap-ms = <100>;
+// tap-ms = <100>;
 // };
 
 /* Custom behaviors */
@@ -85,82 +106,90 @@ ZMK_TAP_DANCE(ss_cw,
     tapping-term-ms = <200>;
     bindings = <&sk LSHFT>, <&caps_word>;
 )
-
-ZMK_HOLD_TAP(gqt, 
-    flavor = "tap-preferred";
-    tapping-term-ms = <230>;
-    quick-tap-ms = <125>;
-    bindings = <&kp>, <&kp>;
-)
 ZMK_HOLD_TAP(as, 
     flavor = "tap-preferred";
-    tapping-term-ms = <170>;
+    tapping-term-ms = <165>;
     quick-tap-ms = <0>;
     bindings = <&kp>, <&kp>;
 )
+// tap: mo | shift + tap: delete | hold: num layer
+ZMK_HOLD_TAP(mo_tog, 
+    flavor = "hold-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&mo>, <&tog>;
+)
 
-// tap: backspace | shift + tap: delete | hold: num layer
-ZMK_MOD_MORPH(bs_del_num,
-    bindings = <&lt NUM BSPC>, <&kp DEL>;
+// tap: backspace | shift + tap: delete 
+ZMK_MOD_MORPH(bs_del,
+    bindings = <&kp BSPC>, <&kp DEL>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// // ZMK_APPLY_MATRIX_TRANSFORM(five_column_transform)
-// // ZMK_CONDITIONAL_LAYER(its_magic, 1 2, 3)
-// // windows sleep macro
-// ZMK_MACRO(win_sleep,
-//     wait-ms = <100>;
-//     tap-ms = <5>;
-//     bindings = <&kp LG(X) &kp U &kp S>;
-// )
-// // combos
-// ZMK_COMBO(sleep,    &win_sleep,  RT3 RT4, FN)  // put Windows to sleep, only active on FN layer
-// // ZMK_COMBO(copy_cut, &copy_cut,   LB2 LB3, ALL)  // copy on tap, cut on double-tap, active on all layers
-// // ZMK_COMBO(paste,    &kp LS(INS), LB1 LB2, ALL)  // paste, active on all layers
-// ZMK_COMBO(copy,     &kp LC(C),   LB2 LB3, ALL)
-// ZMK_COMBO(paste,    &kp LC(V),   LB1 LB2, ALL)
+// ZMK_APPLY_MATRIX_TRANSFORM(five_column_transform)
+ZMK_CONDITIONAL_LAYER(its_magic, 1 2, 3)
+// windows sleep macro
+ZMK_MACRO(win_sleep,
+    wait-ms = <100>;
+    tap-ms = <5>;
+    bindings = <&kp LG(X) &kp U &kp S>;
+)
+// combos
+// #define COMBO_TERM 40  // timeout of 40ms (default is 30ms if omitted)
+
+ZMK_COMBO(sleep,    &win_sleep,  RT3 RT4, NAV)  // put Windows to sleep, only active on NAV layer
+// ZMK_COMBO(copy_cut, &copy_cut,   LB2 LB3, ALL)  // copy on tap, cut on double-tap, active on all layers
+ZMK_COMBO(copy,     &kp LC(C),   LB2 LB3, ALL)
+ZMK_COMBO(paste,    &kp LC(V),   LB1 LB2, ALL)
+ZMK_COMBO(esc,      &kp ESC,     LM1 LM2, ALL)
+ZMK_COMBO(tab,      &kp TAB,     LM2 LM3, ALL)
+ZMK_COMBO(ret,      &kp RET,     RM2 RM3, ALL)
+ZMK_COMBO(backspace,&kp BSPC,    RM1 RM2, ALL)
 
 // ZMK_LAYER(qwerty,
 // &kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L   &kp BSPC
-// &kp TAB     &kp A        &kp O         &kp E         &kp U          &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &kp H         &kp T         &kp N         &kp S   &kp SQT
+// &kp TAB     &kp A        &kp O         &kp E         &kp U          &kp I      &kp LEFT  &kp RET  &kp RIGHT  &kp D   &kp H         &kp T         &kp N         &kp S   &kp SQT
 // &kp LCTRL   &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z   &kp ESC
 //                                        &kp J       &kp SPACE  &kp RET                                &kp ESC &kp RET   &kp RET
 // // sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
 // )
 
+
 ZMK_LAYER(dvorak,
-&kp SQT     &kp SQT      &kp COMMA     &kp DOT       &kp P          &kp Y      &kp UP                          &kp F   &kp G         &kp C         &kp R         &kp L         &kp BSPC
-&kp TAB     &hml LGUI A  &hml LALT O   &hml LCTRL E  &hml LSHFT U   &kp I      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D   &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &kp SQT
-&kp LCTRL   &kp SEMI     &kp Q         &kp J         &kp K          &kp X      &kp SPACE &kp DOWN              &kp B   &kp M         &kp W         &kp V         &kp Z         &kp ESC
-                                       // &kp J       &kp SPACE  ___                                &kp ESC &kp RET   ___
-                                       ___      &kp SPACE  &bs_del_num                      &kp ESC &kp RET   ___
-                                       // &mo NUM       &lt NUM SPACE  &bs_del_num                                &kp ESC &lt SYM RET   &mo FN
-// sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+XXX     &kp SQT      &kp COMMA     &kp DOT       AS(P)          AS(Y)                &kp UP              AS(F)   AS(G)         AS(C)         AS(R)         AS(L)         XXX
+XXX     &hml LGUI A  &hml LALT O   &hml LSHFT E  &hml LCTRL U   AS(I)      &kp LEFT  &kp RET  &kp RIGHT  AS(D)   &hmr RCTRL H  &hmr RSHFT  T &hmr RALT N   &hmr RGUI S   XXX
+XXX     &kp SEMI     AS(Q)         &kp J         &kp K          AS(X)      &kp SPACE &kp DOWN            AS(B)   AS(M)         AS(W)         AS(V)         AS(Z)         XXX
+                                       &lt 1 TAB       &lt 2 SPACE      &bs_del                              &kp ESC   &lt 2 RET   &mo_tog 1 1,
+&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN
 )
-
-
 
 ZMK_LAYER(num,
-&kp TAB     &kp LBKT        &kp N9         &kp N8         &kp N7          &kp RBKT       &kp UP                          &sk RSHFT   &kp G         &kp C         &kp R         &kp L         &kp BSPC
-&kp DOT     &gqt LGUI MINUS &gqt LALT N3   &gqt LCTRL N2  &gqt LSHFT N1   &kp EQUAL      &kp LEFT  &kp ENTER  &kp RIGHT  &kp D       &hmr RSHFT H  &hmr LCTRL T  &hmr LALT N   &hmr LGUI S   &kp SQT
-&kp LCTRL   &kp BSLH        &kp N6         &kp N5         &kp N4          &kp DEL        &kp SPACE &kp DOWN              &kp B       &kp M         &kp W         &kp V         &kp Z         &kp ESC
-                                                  &kp BSPC      &kp N0  &kp SPACE                      &kp PLUS &kp RET   ___
-                                       // &mo NUM       &lt NUM SPACE  &bs_del_num                                &kp ESC &lt SYM RET   &mo FN
-//  sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+XXX     &kp LBKT        &kp N9         &kp N8         &kp N7          &kp RBKT                 &kp UP            ___         &caps_word         &kp CAPS       &sk LGUI         &kp FSLH  XXX
+XXX     &hml LGUI MINUS &hml LALT N3   &hml LSHFT N2  &hml LCTRL N1   &kp DOT      &kp LEFT  &kp RET  &kp RIGHT  &kp LEFT    &hmr RCTRL DOWN    &hmr RSHFT UP  &hmr RALT RIGHT     &kp SQT   XXX
+XXX     &kp BSLH        &kp N6         &kp N5         &kp N4          &kp EQUAL        &kp SPACE &kp DOWN        &kp PG_DN   &kp HOME  &kp END  &kp PG_UP      &kp CAPS  XXX
+                                                 &kp N0  &kp SPACE    &bs_del                                    &kp ESC     &kp RET   &to 0,
+&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN
 )
 
-
-ZMK_LAYER(FN,
-&kp TAB  &kp LBKT         &kp F9        &kp F8         &kp F7         &kp RBKT    &kp UP                         &kp RSHFT     &kp LCTRL &kp LALT        &kp LGUI   ___          ___
-&kp DOT  &hml LGUI MINUS  &hml LALT F3  &hml LSHFT F2  &hml LCTRL F1  &kp EQUAL   &kp LEFT  &kp ENTER  &kp RIGHT &kp LEFT      &kp DOWN  &hmr RSHFT UP   &kp RIGHT  ___          ___
-&kp TAB  &kp BSLH         &kp F6        &kp F5         &kp F4         &kp DEL     &kp SPACE &kp DOWN             &kp PG_DN     &kp HOME  &kp END         &kp PG_UP  &kp CAPS     ___
-                                         &kp BSPC      &kp F10        &bs_del_num                                &kp PLUS      ___       &kp RET
+ZMK_LAYER(sym,
+XXX     &kp F10       &kp F9         &kp F8         &kp F7          &caps_word              &kp UP                 &bt BT_NXT   &bt BT_PRV    &bt BT_CLR_ALL  &rgb_ug RGB_TOG &rgb_ug RGB_EFF XXX
+XXX     &hml LGUI F11 &hml LALT F3   &hml LSHFT F2  &hml LCTRL F1   &sys_reset      &kp LEFT  &kp RET  &kp RIGHT   &sys_reset   &bt BT_SEL 0  &bt BT_SEL  1   &bt BT_SEL 2    &rgb_ug RGB_BRI XXX
+XXX     &kp F12       &kp F6         &kp F5         &kp F4          &bootloader          &kp SPACE &kp DOWN        &bootloader  &bt BT_CLR    &out OUT_TOG    &rgb_ug RGB_BRD    ___ XXX
+                                             &kp F12  &kp SPACE     &kp BSPC                                       &to 0      &lt 0 RET   &to 1 ,
+&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN
 )
-// ZMK_LAYER(num,
-//   &kp TAB  &kp LBKT        &kp N9       &kp N8        &kp N7        &kp RBKT   &kp UP                         &kp RSHFT     &kp LCTRL &kp LALT        &kp LGUI   ___          ___            ___
-//   &kp DOT  &gqt LGUI MINUS &gqt LALT N3 &gqt LSHFT N2 &gqt LCTRL N1 &kp EQUAL  &kp LEFT  &kp ENTER  &kp RIGHT  &kp LEFT      &kp DOWN  &gqt RSHFT UP   &kp RIGHT  ___          ___
-//   &kp TAB  &kp BSLH        &kp N6       &kp N5        &kp N4        &kp DEL    &kp SPACE &kp DOWN             &kp PG_DN     &kp HOME  &kp END         &kp PG_UP  &kp CAPS     ___
-//                                         &kp BSPC      &kp N0        ___                               &kp PLUS      ___    &kp RET        
-//                                         // &kp BSPC      &kp N0        &bs_del_num                               &kp PLUS      &gresc    &kp RET        
-// )                                                                                           
 
+ZMK_LAYER(colemak-dh,
+XXX     &kp Q         &kp W        &kp F         AS(P)          AS(B)                &kp UP              &kp J   AS(L)         AS(U)         AS(Y)         AS(L)         XXX
+XXX     &hml LGUI A  &hml LALT R   &hml LSHFT S  &hml LCTRL T   AS(G)      &kp LEFT  &kp RET  &kp RIGHT  AS(M)   &hmr RCTRL N  &hmr RSHFT  E &hmr RALT I   &hmr RGUI O   XXX
+XXX     &kp Z        AS(X)         AS(C)         AS(D)          AS(V)      &kp SPACE &kp DOWN            &kp K   AS(H)         &kp COMMA     &kp DOT       &kp FSLH      XXX
+                                       &lt 1 TAB       &lt 2 SPACE      &bs_del                              &kp ESC   &lt 2 RET   &to 0,
+&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN
+)
+// ZMK_LAYER(nav,
+// XXX     &kp LBKT        &kp F9         &kp F8         &kp F7          &sys_reset                 &kp UP                &sys_reset   &bt BT_CLR  &bt BT_NXT   &bt BT_CLR_ALL   ___       XXX
+// XXX     &hml LGUI MINUS &hml LALT F3   &hml LCTRL F2  &hml LSHFT F1   &bootloader      &kp LEFT  &kp RET  &kp RIGHT  &bootloader  &bt BT_SEL  &bt BT_PRV   &kp RIGHT        &kp SQT   XXX
+// XXX     &kp BSLH        &kp F6         &kp F5         &kp F4          &kp DEL          &kp SPACE &kp DOWN              &rgb_ug RGB_TOG   &kp HOME  &kp END   &kp PG_UP         &kp CAPS  XXX
+//                                                  &kp F12  &kp SPACE       &bs_del                                  &kp ESC     &kp RET   XXX ,
+//                                        // &mo NUM       &lt NUM SPACE  &bs_del                                &kp ESC &lt SYM RET   &mo FN
+// &inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN
+// )

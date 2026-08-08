@@ -155,6 +155,7 @@ ZMK_LAYER(dvorak,
 //                                         // &kp BSPC      &kp N0        &bs_del_num                               &kp PLUS      &gresc    &kp RET        
 // )                                                                                           
 
+
 ZMK_LAYER(FN,
 &kp TAB  &kp LBKT        &kp F9       &kp F8        &kp F7        &kp RBKT   &kp UP                         &sk RSHFT     &sk LCTRL &sk LALT        &sk LGUI   ___          ___            ___
 &kp DOT  &hml LGUI MINUS &hml LALT F3 &hml LSHFT F2 &hml LCTRL F1 &kp EQUAL  &kp LEFT  &kp ENTER  &kp RIGH  &kp LEFT      &kp DOWN  &hmr RSHFT UP   &kp RIGHT  ___          ___

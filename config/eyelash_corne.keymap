@@ -149,6 +149,7 @@ ZMK_LAYER(num,
 //  sensors = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
 )
 
+
 ZMK_LAYER(FN,
 &kp TAB  &kp LBKT         &kp F9        &kp F8         &kp F7         &kp RBKT    &kp UP                         &kp RSHFT     &kp LCTRL &kp LALT        &kp LGUI   ___          ___
 &kp DOT  &hml LGUI MINUS  &hml LALT F3  &hml LSHFT F2  &hml LCTRL F1  &kp EQUAL   &kp LEFT  &kp ENTER  &kp RIGHT &kp LEFT      &kp DOWN  &hmr RSHFT UP   &kp RIGHT  ___          ___

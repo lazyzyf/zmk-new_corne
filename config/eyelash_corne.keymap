@@ -125,7 +125,7 @@ ZMK_MOD_MORPH(bs_del,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// ZMK_APPLY_MATRIX_TRANSFORM(five_column_transform)
+ZMK_APPLY_MATRIX_TRANSFORM(five_column_transform)  //snap off last column
 ZMK_CONDITIONAL_LAYER(its_magic, 1 2, 3)
 // windows sleep macro
 ZMK_MACRO(win_sleep,
